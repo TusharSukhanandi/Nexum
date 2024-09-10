@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 
-const sendMail = (email, otp) => {
+const sendMail = async (email, otp) => {
+  try{
   const transporter = nodemailer.createTransport({
     service: "gmail",
     secure: true,
@@ -12,7 +13,7 @@ const sendMail = (email, otp) => {
   });
 
   const receiver = {
-    from: "nexum.text@gmail.com",
+    from: process.env.NODEMAILER_USER,
     to: email,
     subject: "OTP for your Nexum sign up",
     html: `
@@ -29,15 +30,19 @@ const sendMail = (email, otp) => {
           </html>
         `,
   };
-
-  transporter.sendMail(receiver, (error, emailRes) => {
-    if (error) {
-      console.log(error);
-      return false;
+ 
+  const isOtpSent = await transporter.sendMail(receiver)
+  
+    if(isOtpSent){
+      return true
     }
-  });
+  
+  return false;
+}
+catch (error){
+return false
+}
 
-  return true;
-};
+}
 
 export default sendMail;

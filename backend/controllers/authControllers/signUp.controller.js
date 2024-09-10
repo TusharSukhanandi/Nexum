@@ -34,7 +34,7 @@ const signUp = async (req, res) => {
 
     if (isUserNameAvailable) {
       return res.status(400).json({
-        message: "user name already exits",
+        message: "user name already exists",
       });
     }
 

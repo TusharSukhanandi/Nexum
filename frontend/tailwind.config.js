@@ -17,9 +17,10 @@ export default {
       },
       keyframes: {
         fadeIn: {
-          '0%': {background: "black", opacity: '0' },
+          '0%': {opacity: '0' },
           '100%': { opacity: '1' },
         },
+       
       },
     },
   },
