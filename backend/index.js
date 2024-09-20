@@ -1,30 +1,36 @@
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import cors from "cors"
+import cors from "cors";
+import path from "path"
 
 import connectToMongoDB from "./db/connectToDataBase.js";
-import authRoute from "./routes/auth.route.js"
-import messageRoute from "./routes/message.route.js"
-import usersRoute from "./routes/users.route.js"
+import authRoute from "./routes/auth.route.js";
+import messageRoute from "./routes/message.route.js";
+import usersRoute from "./routes/conversations.route.js";
 
-dotenv.config()
+dotenv.config();
+import {app, server} from "./socket/socket.js"
 
-const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(express.json())
-app.use(cookieParser())
-app.use(cors())
+const __dirname = path.resolve()
+
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors({ origin: process.env.CORS_ORIGIN_URL, credentials: true }));
+
+app.use(express.static(path.join(__dirname, "/frontend/dist")))
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"))
+})
 
 app.use("/auth", authRoute);
 app.use("/message", messageRoute);
-app.use("/users", usersRoute);
+app.use("/conversations", usersRoute);
 
-
-app.listen(PORT, () => {
-    connectToMongoDB()
-    console.log(`server is alive at ${PORT}`);
-})
-
- 
+server.listen(PORT, () => {
+  connectToMongoDB();
+  console.log(`server is alive at ${PORT}`);
+});

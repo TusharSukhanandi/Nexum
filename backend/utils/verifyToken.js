@@ -2,11 +2,13 @@ import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 
 const verifyToken = async (req, res, next) => {
-  const token = req.cookies.jwt;
- 
+  const {NexumJwt : token } = req.cookies;
+
+  try{
   if (!token) {
     return res.status(401).json({ error : "unauthorized access - No token provided" });
   }
+
   const verifyToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
   
@@ -23,6 +25,9 @@ const verifyToken = async (req, res, next) => {
   req.user = user;
 
   next();
+}catch (error){
+  console.log(error)
+}
 };
 
 export default verifyToken;

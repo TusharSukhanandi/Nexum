@@ -4,12 +4,13 @@ import Header from "../../componants/Header";
 import Background from "../../componants/Background";
 import { Link } from "react-router-dom";
 import Toast from "../../componants/Toast";
+import useLogOut from "../../hooks/useLogOut";
 
 const Home = () => {
 
   return (
     <Background>
-      <Header />
+     <Header height={"h-[20dvh]"} />
       <main className="animate-fadeIn w-full h-[50dvh] md:h-[60dvh] flex flex-col md:flex-row justify-center items-center relative">
         <div className="w-80 h-80 absolute z-10 bg-purple-950 rounded-full blur-[150px]"></div>
         <div className="z-20 flex font-mukta items-center justify-center gap-2 flex-col ">

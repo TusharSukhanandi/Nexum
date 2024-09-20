@@ -2,9 +2,10 @@ import Background from "../../componants/Background";
 import Header from "../../componants/Header";
 import RandomIcons from "../../componants/RandomIcons";
 import { Link } from "react-router-dom";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import useVerifyEmail from "../../hooks/useVerifyEmail";
 import useVerifyOtp from "../../hooks/useVerifyOtp";
+import useSignUp from "../../hooks/useSignUp";
 
 const Signup = () => {
   const [isOtpSent, setIsOtpSent] = useState(false);
@@ -17,8 +18,9 @@ const Signup = () => {
     confirmPassword: "",
   });
 
-  const { verifyEmail } = useVerifyEmail();
-  const {verifyOtp} = useVerifyOtp();
+  const { verifyEmail, loading } = useVerifyEmail();
+  const { verifyOtp, } = useVerifyOtp();
+  const { signUp, } = useSignUp();
 
   const hadnleSignIn = async () => {
     if (!isOtpSent && !isOtpCorrect) {
@@ -29,13 +31,22 @@ const Signup = () => {
       }
     }
     if (isOtpSent && !isOtpCorrect) {
-      const result = await verifyOtp({email : inputs.email, otp : inputs.otp, resensOtp : inputs.resensOtp});
-      if(result){
+      const result = await verifyOtp({
+        email: inputs.email,
+        otp: inputs.otp,
+        resensOtp: inputs.resensOtp,
+      });
+      if (result) {
         return setIsOtpCorrect(true);
       }
     }
     if (isOtpCorrect) {
-      return console.log("signed up");
+      const result = await signUp({
+        userName: inputs.userName,
+        password: inputs.password,
+        confirmPassword: inputs.confirmPassword,
+        email: inputs.email,
+      });
     }
   };
 
@@ -74,7 +85,7 @@ const Signup = () => {
 
   return (
     <Background>
-      <Header></Header>
+      <Header height={"h-[20dvh]"} />
       <div className="md:w-1/3 z-10 relative animate-fadeIn w-full bg-transparent h-auto md:m-auto mt-10 flex flex-col gap-5 p-10">
         <h5 className="text-center text-white text-4xl">Sign-up</h5>
 
@@ -97,7 +108,12 @@ const Signup = () => {
                 className="w-full p-3 text-white text-center border-b-2 border-purple-500 rounded-lg bg-transparent active:border-purple-800"
                 onChange={(e) => setInputs({ ...inputs, otp: e.target.value })}
               />
-              <h5 onClick={() => setInputs({...inputs, resensOtp : true})} className="text-white mt-5 -mb-5 text-center font-poppins">resend</h5>
+              <h5
+                onClick={() => setInputs({ ...inputs, resensOtp: true })}
+                className="text-white mt-5 -mb-5 text-center font-poppins"
+              >
+                resend
+              </h5>
             </div>
           </>
         ) : null}
@@ -139,13 +155,16 @@ const Signup = () => {
 
         <div className="text-white w-[90%}">
           <Link to={"/login"}>
-            <h1 className="text-center font-poppins">already have an account?</h1>
+            <h1 className="text-center font-poppins">
+              already have an account?
+            </h1>
           </Link>
         </div>
         <div className="w-[90%] mx-auto mt-3">
           <button
             onClick={hadnleSignIn}
-            className="z-50 transition w-auto m-auto block duration-1000 text-white text-center text-s px-5 py-2 border-2 font-medium border-purple-800 rounded-2xl hover:text-purple-950 hover:bg-white hover:border-white active:scale-50"
+            className="z-50 transistion w-auto m-auto block duration-1000 text-white text-center text-s px-5 py-2 border-2 font-medium border-purple-800 rounded-2xl hover:text-purple-950 hover:bg-white hover:border-white active:scale-50"
+            disabled={loading}
           >
             {isOtpCorrect ? "sign up" : "validate"}
           </button>

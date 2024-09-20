@@ -1,14 +1,14 @@
-import { useContext, useState } from "react";
-import { ToastContext } from "../context/toastContext";
+import { useState } from "react";
+import { useToastContext } from "../context/toastContext";
 import axios from "axios";
 
 const useVerifyEmail = () => {
-  const showToast = useContext(ToastContext);
+  const showToast = useToastContext();
   const [loading, setLoading] = useState(false);
 
   const verifyEmail = async (email) => {
     if (!email) {
-      showToast("plase enter email", "error");
+      showToast("please enter email", "error");
       return false
     }
 
@@ -29,7 +29,7 @@ const useVerifyEmail = () => {
     }
   };
 
-  return { verifyEmail };
+  return { verifyEmail, loading};
 };
 
 export default useVerifyEmail;

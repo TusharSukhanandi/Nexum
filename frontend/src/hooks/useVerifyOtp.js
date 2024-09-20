@@ -1,17 +1,15 @@
-import { useContext, useState } from "react";
-import { ToastContext } from "../context/toastContext";
+import { useState } from "react";
+import { useToastContext } from "../context/toastContext";
 import axios from "axios";
 
 const useVerifyOtp = () => {
-  const showToast = useContext(ToastContext);
+  const showToast = useToastContext();
   const [loading, setLoading] = useState(false);
 
-  const verifyOtp = async ({email, otp}) => {
-    console.log({email, otp});
-    
-    if(!otp){
+  const verifyOtp = async ({ email, otp }) => {
+    if (!otp) {
       showToast("plase enter OTP", "error");
-      return false
+      return false;
     }
 
     try {
@@ -19,19 +17,20 @@ const useVerifyOtp = () => {
         import.meta.env.VITE_API_URL + "/auth/verifyOtp",
         { email, otp }
       );
+
       showToast(response.data.message, "info");
-      if (response.data.isOtpCorrect) {
+      if (response?.data?.isOtpCorrect) {
         return true;
       }
     } catch (error) {
-      showToast(error.response.data.message, "error");
+      showToast(error?.response?.data?.message, "error");
       return false;
     } finally {
       setTimeout(() => setLoading(false), 500);
     }
   };
 
-  return { verifyOtp };
+  return { verifyOtp, loading };
 };
 
 export default useVerifyOtp;

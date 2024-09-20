@@ -1,6 +1,7 @@
 import Conversation from "../../models/conversation.model.js"
 
-const users = async (req, res) => {
+const conversations = async (req, res) => {
+   
     const senderId = req.user._id
     const loggedInUserName = req.user.userName
 
@@ -22,4 +23,4 @@ const users = async (req, res) => {
     res.send(filteredUsers)
 }
 
-export default users
+export default conversations

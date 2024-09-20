@@ -37,6 +37,15 @@ const verifyEmail = async (req, res) => {
     let otp = generateOtp();
     let otpCreatedAt = generateOtpExpiryTime();
 
+    let isMailSent = await sendMail(email, otp);
+
+    if (!isMailSent) {
+      return res.status(400).json({
+        message: "E-mail is invalid",
+        isOtpSent: false,
+      });
+    }
+
     const newUser = await User.create({ email, otp, otpCreatedAt });
 
     if (!newUser) {
@@ -46,18 +55,6 @@ const verifyEmail = async (req, res) => {
       });
     }
 
-    let isMailSent = sendMail(email, otp);
-
-    if (!isMailSent) {
-      return res.status(400).json({
-        message: "E-mail is invalid",
-        isOtpSent: false,
-      });
-    }
-
-    return res
-      .status(200)
-      .json({ message: "otp sent to email successfully", isOtpSent: true });
     return res
       .status(200)
       .json({ message: "otp sent to email successfully", isOtpSent: true });
@@ -71,7 +68,6 @@ const verifyEmail = async (req, res) => {
 const verifyOtp = async (req, res) => {
   try {
     let { email, otp: inputedOtp } = req.body;
-console.log("validatiing");
 
     if (!email || !inputedOtp) {
       return res
@@ -95,6 +91,8 @@ console.log("validatiing");
         .json({ message: "your email is validated", isOtpCorrect: true });
     }
 
+    // resend otp funcionality
+
     // if (user && !user.isVerified && user.otp) {
     //   user.otp = undefined;
     //   user.otpCreatedAt = undefined;
@@ -113,9 +111,9 @@ console.log("validatiing");
 
     //   user.otp = otp;
     //   user.otpCreatedAt = otpCreatedAt;
-      
+
     //   await user.save()
-      
+
     //   return res
     //   .status(200)
     //   .json({ message: "otp sent to email successfully", isOtpSent: true });

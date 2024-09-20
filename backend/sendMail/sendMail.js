@@ -40,6 +40,8 @@ const sendMail = async (email, otp) => {
   return false;
 }
 catch (error){
+  console.log(error);
+  
 return false
 }
 

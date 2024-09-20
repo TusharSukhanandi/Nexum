@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon backend/index.js"
+    "dev": "nodemon backend/index.js",
+    "start" : "node backend/index.js",
+    "build" : "npm install && npm install --prefix frontend && npm run buld -- prefix frontend"
   },
   "type": "module",
   "keywords": [],
@@ -19,6 +21,9 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.6.0",
     "nodemailer": "^6.9.14",
-    "nodemon": "^3.1.1"
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }
