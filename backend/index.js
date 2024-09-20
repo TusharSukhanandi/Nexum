@@ -18,7 +18,7 @@ const __dirname = path.resolve()
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: "https://nexum-6si8.onrender.com", credentials: true }));
+app.use(cors({ origin: "https://localhost:3000", credentials: true }));
 
 app.use("/auth", authRoute);
 app.use("/message", messageRoute);
