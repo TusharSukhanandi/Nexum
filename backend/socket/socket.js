@@ -9,7 +9,7 @@ console.log(process.env.CORS_ORIGIN_URL);
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://nexum-6si8.onrender.com",
+    origin: "https://localhost:3000",
     methods: ["GET", "POST"],
   },
 });
