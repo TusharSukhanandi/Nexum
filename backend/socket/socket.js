@@ -4,8 +4,6 @@ import http from "http";
 
 const app = express();
 
-console.log(process.env.CORS_ORIGIN_URL);
-
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
