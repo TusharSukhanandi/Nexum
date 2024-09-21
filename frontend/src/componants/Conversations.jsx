@@ -12,9 +12,7 @@ const Conversations = () => {
  
   useEffect(() => {
     const getConversations = async () => {
-      const conversations = await fetchConversations();
-      console.log(conversations);
-      
+      const conversations = await fetchConversations(); 
       setConversations(conversations);
     };
     getConversations();
