@@ -16,7 +16,7 @@ export const SocketContextProvider = ({ children }) => {
   useEffect(() => {
       
       if (user) {
-      const socket = io(import.meta.env.VITE_API_URL, {
+      const socket = io("https://nexum-6si8.onrender.com/", {
         query: {  
           userId: user.userId
         }

@@ -18,17 +18,17 @@ const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(cookieParser());
-// app.use(cors({ origin: process.env.CORS_ORIGIN_URL, credentials: true }));
+//app.use(cors({ origin: process.env.CORS_ORIGIN_URL, credentials: true }));
+
+app.use(express.static(path.join(__dirname, "/frontend/dist")))
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"))
+})
 
 app.use("/auth", authRoute);
 app.use("/message", messageRoute);
 app.use("/conversations", usersRoute);
-
-app.use(express.static(path.join(__dirname, "/frontend/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "dist", "indexhtml"));
-});
 
 server.listen(PORT, () => {
   connectToMongoDB();
