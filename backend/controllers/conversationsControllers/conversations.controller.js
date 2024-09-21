@@ -19,7 +19,6 @@ const conversations = async (req, res) => {
         })
     })
 
-    // console.log(users);
     res.send(filteredUsers)
 }
 
