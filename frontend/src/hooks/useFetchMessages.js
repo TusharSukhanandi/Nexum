@@ -12,6 +12,7 @@ const useFetchMessages = () => {
   );
 
   const fetchMessages = async () => {
+
     if (!selectedConversation._id) {
       return;
     }
@@ -25,6 +26,8 @@ const useFetchMessages = () => {
       dispatch(setMessages(response.data));
     } catch (error) {
       console.log(error);
+    }finally{
+      setTimeout(() => setLoading(false), 500);
     }
   };
 

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useToastContext } from "../context/toastContext";
 import axios from "axios";
 import { useUserContext } from "../context/userContext";
+import { set } from "mongoose";
 
 const useSignUp = (inputs) => {
-  const [loading, setLoading] = useState(false);
+  const [loadingFromSignUp, setLoadingFromSignUp] = useState(false);
 
   const showToast = useToastContext();
   const { setUser } = useUserContext();
@@ -21,6 +22,7 @@ const useSignUp = (inputs) => {
     }
 
     try {
+      setLoadingFromSignUp(true)
       const response = await axios.post(
         import.meta.env.VITE_API_URL + "/auth/signUp",
         {
@@ -45,8 +47,7 @@ const useSignUp = (inputs) => {
       showToast(errorMessage, "error");
       return;
     }finally{
-      setTimeout(() => setLoading(false), 500);
-
+      setTimeout(() => setLoadingFromSignUp(false), 500);
     }
   };
 
@@ -65,7 +66,7 @@ const useSignUp = (inputs) => {
     }
     return true;
   };
-  return { signUp, loading };
+  return { signUp, loadingFromSignUp };
 };
 
 export default useSignUp;

@@ -18,13 +18,10 @@ const generateOtpExpiryTime = () => {
 const verifyEmail = async (req, res) => {
   try {
     let { email } = req.body;
-    console.log(req.body);
-
+   
     if (!email) {
       return res.status(400).json({ message: "e-mail is required" });
     }
-
-    console.log(email);
 
     email = email.trim();
 

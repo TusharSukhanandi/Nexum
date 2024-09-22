@@ -18,9 +18,11 @@ const Signup = () => {
     confirmPassword: "",
   });
 
-  const { verifyEmail, loading } = useVerifyEmail();
-  const { verifyOtp, } = useVerifyOtp();
-  const { signUp, } = useSignUp();
+  
+  
+  const { verifyEmail, loadingFromEmail } = useVerifyEmail();
+  const { verifyOtp, loadingFromOtp} = useVerifyOtp();
+  const { signUp, loadingFromSignUp} = useSignUp();
 
   const hadnleSignIn = async () => {
     if (!isOtpSent && !isOtpCorrect) {
@@ -163,10 +165,11 @@ const Signup = () => {
         <div className="w-[90%] mx-auto mt-3">
           <button
             onClick={hadnleSignIn}
-            className="z-50 transistion w-auto m-auto block duration-1000 text-white text-center text-s px-5 py-2 border-2 font-medium border-purple-800 rounded-2xl hover:text-purple-950 hover:bg-white hover:border-white active:scale-50"
-            disabled={loading}
+            className="w-24 h-12 z-50 m-auto duration-700 flex gap-2 justify-center items-center text-white text-center text-s border-2 font-medium border-purple-800 rounded-2xl hover:text-purple-950 hover:bg-white hover:border-white active:scale-50"
+            disabled={loadingFromEmail || loadingFromOtp || loadingFromSignUp}
           >
-            {isOtpCorrect ? "sign up" : "validate"}
+            
+            {loadingFromEmail || loadingFromOtp || loadingFromSignUp ? <Loading/> : isOtpCorrect ? "sign up" : "validate"}
           </button>
         </div>
       </div>
@@ -175,5 +178,15 @@ const Signup = () => {
     </Background>
   );
 };
+
+
+const Loading = () => {
+  return (
+    <div className="w-4 h-4 bg-purple-500 rounded-md animate-spin" >
+
+    </div>
+  )
+}
+
 
 export default Signup;

@@ -4,7 +4,7 @@ import axios from "axios";
 
 const useVerifyOtp = () => {
   const showToast = useToastContext();
-  const [loading, setLoading] = useState(false);
+  const [loadingFromOtp, setLoadingFromOtp] = useState(false);
 
   const verifyOtp = async ({ email, otp }) => {
     if (!otp) {
@@ -13,6 +13,7 @@ const useVerifyOtp = () => {
     }
 
     try {
+      setLoadingFromOtp(true)
       const response = await axios.post(
         import.meta.env.VITE_API_URL + "/auth/verifyOtp",
         { email, otp }
@@ -26,11 +27,11 @@ const useVerifyOtp = () => {
       showToast(error?.response?.data?.message, "error");
       return false;
     } finally {
-      setTimeout(() => setLoading(false), 500);
+      setTimeout(() => setLoadingFromOtp(false), 500);
     }
   };
 
-  return { verifyOtp, loading };
+  return { verifyOtp, loadingFromOtp };
 };
 
 export default useVerifyOtp;

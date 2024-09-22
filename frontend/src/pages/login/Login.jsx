@@ -18,6 +18,9 @@ const Login = () => {
     logIn(inputs);
   };
 
+  console.log(loading);
+  
+
   const memoizedRandomIcons = useMemo(() => {
     return (
       <div className="animate-fadeIn">
@@ -84,16 +87,25 @@ const Login = () => {
         <div className="w-[90%] mx-auto mt-3">
           <button
             onClick={handleLogin}
-            className="z-50 transition w-auto m-auto block duration-1000 text-white text-center text-s px-5 py-2 border-2 font-medium border-purple-800 rounded-2xl hover:text-purple-950 hover:bg-white hover:border-white active:scale-50"
-            disabled={loading}
+            className="w-24 h-12 z-50 m-auto duration-700 flex gap-2 justify-center items-center text-white text-center text-s border-2 font-medium border-purple-800 rounded-2xl hover:text-purple-950 hover:bg-white hover:border-white active:scale-50"
+            disabled={loading }
           >
-            {loading ? "loading" : "Log-in" }
+        
+            {loading ? <Loading/>  : "log in" }
           </button>
         </div>
-      </div>
+      </div>  
       {memoizedRandomIcons}
     </Background>
   );
 };
+
+const Loading = () => {
+  return (
+    <div className="w-4 h-4 bg-purple-500 rounded-md animate-spin" >
+
+    </div>
+  )
+}
 
 export default Login;
