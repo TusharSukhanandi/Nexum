@@ -10,6 +10,7 @@ import useSignUp from "../../hooks/useSignUp";
 const Signup = () => {
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [isOtpCorrect, setIsOtpCorrect] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [inputs, setInputs] = useState({
     email: "",
     otp: 0,
@@ -18,11 +19,9 @@ const Signup = () => {
     confirmPassword: "",
   });
 
-  
-  
   const { verifyEmail, loadingFromEmail } = useVerifyEmail();
-  const { verifyOtp, loadingFromOtp} = useVerifyOtp();
-  const { signUp, loadingFromSignUp} = useSignUp();
+  const { verifyOtp, loadingFromOtp } = useVerifyOtp();
+  const { signUp, loadingFromSignUp } = useSignUp();
 
   const hadnleSignIn = async () => {
     if (!isOtpSent && !isOtpCorrect) {
@@ -132,15 +131,21 @@ const Signup = () => {
                 }
               />
             </div>
-            <div className="w-[90%] mx-auto">
+            <div className="w-[90%] relative mx-auto">
               <input
-                type="Password"
+                type={showPassword ? "text" : "Password"}
                 placeholder="Password"
                 className="w-full p-3 text-white text-center border-b-2 border-purple-500 rounded-lg bg-transparent active:border-purple-800"
                 onChange={(e) =>
                   setInputs({ ...inputs, password: e.target.value })
                 }
               />
+              <div
+                className="text-white absolute top-1/2 -translate-y-1/2 right-5 sm:cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                eye
+              </div>
             </div>
             <div className="w-[90%] mx-auto">
               <input
@@ -168,8 +173,13 @@ const Signup = () => {
             className="w-24 h-12 z-50 m-auto duration-700 flex gap-2 justify-center items-center text-white text-center text-s border-2 font-medium border-purple-800 rounded-2xl hover:text-purple-950 hover:bg-white hover:border-white active:scale-50"
             disabled={loadingFromEmail || loadingFromOtp || loadingFromSignUp}
           >
-            
-            {loadingFromEmail || loadingFromOtp || loadingFromSignUp ? <Loading/> : isOtpCorrect ? "sign up" : "validate"}
+            {loadingFromEmail || loadingFromOtp || loadingFromSignUp ? (
+              <Loading />
+            ) : isOtpCorrect ? (
+              "sign up"
+            ) : (
+              "validate"
+            )}
           </button>
         </div>
       </div>
@@ -179,14 +189,8 @@ const Signup = () => {
   );
 };
 
-
 const Loading = () => {
-  return (
-    <div className="w-4 h-4 bg-purple-500 rounded-md animate-spin" >
-
-    </div>
-  )
-}
-
+  return <div className="w-4 h-4 bg-purple-500 rounded-md animate-spin"></div>;
+};
 
 export default Signup;

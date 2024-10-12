@@ -1,10 +1,10 @@
-import express from "express"
+import express from "express";
 
 const route = express.Router();
 
-import users from "../controllers/conversationsControllers/conversations.controller.js";
+import conversations from "../controllers/conversationsControllers/conversations.controller.js";
 import verifyToken from "../utils/verifyToken.js";
 
-route.get("/", verifyToken, users)
+route.get("/", verifyToken, conversations);
 
 export default route;

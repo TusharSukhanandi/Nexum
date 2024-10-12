@@ -17,6 +17,7 @@ const useLogIn = (inputs) => {
     }
 
     try {
+      setLoading(true)
       const response = await axios.post(import.meta.env.VITE_API_URL + "/auth/logIn", {
         userName,
         password,

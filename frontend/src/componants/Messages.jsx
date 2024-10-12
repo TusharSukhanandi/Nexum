@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useMemo, useRef } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { useUserContext } from "../context/userContext";
 import Message from "./Message";
 import { IoSend } from "react-icons/io5";
@@ -13,7 +13,6 @@ const Messages = ({ isMobile }) => {
   const { user } = useUserContext();
 
   useReceiveMessage();
-
 
   const messages = useSelector((state) => state.messages);
 
@@ -31,7 +30,7 @@ const Messages = ({ isMobile }) => {
   const scrollUp = () => {
     setTimeout(() => {
       lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 10);
+    }, 1000);
   };
 
   useEffect(() => {
@@ -55,8 +54,8 @@ const Messages = ({ isMobile }) => {
   }, [selectedConversation.userName]);
 
   const renderedMessages = useMemo(() => {
-
-    return (messages &&
+    return (
+      messages &&
       messages.map((message) => (
         <div
           ref={lastMessageRef}
@@ -71,9 +70,10 @@ const Messages = ({ isMobile }) => {
             time={message.createdAt}
           ></Message>
         </div>
-      )))
-  }, [messages, selectedConversation._userName])
- 
+      ))
+    );
+  }, [messages, selectedConversation._userName]);
+
   return (
     <>
       {!selectedConversation._id ? (
@@ -114,7 +114,7 @@ const Messages = ({ isMobile }) => {
             </div>
           )}
 
-          <form className="h-[10%] w-[90%] m-auto flex justify-evenly items-center ">
+          <div className="h-[10%] w-[90%] m-auto flex justify-evenly items-center ">
             <input
               className="w-[80%] sm:px-3 sm:py-1 p-3 text-white border-b-2 border-purple-500 bg-transparent font-poppins"
               onChange={(e) => setMessage(e.target.value)}
@@ -127,7 +127,7 @@ const Messages = ({ isMobile }) => {
                 <IoSend className="text-3xl text-white hover:text-purple-600 transition-all" />
               </button>
             </div>
-          </form>
+          </div>
         </div>
       )}
     </>
@@ -150,7 +150,7 @@ const PlaceHolderComponent = () => {
 
 const LoadingMessages = () => {
   return (
-    <div className="pt-16 animate-pulse h-[70%] sm:my-0 my-2 w-[90%] m-auto">
+    <div className="animate-pulse h-[70%] overflow-hidden sm:my-0 my-2 w-[90%] m-auto">
       <div className="justify-end flex">
         <div className=" p-6 px-12 m-1 rounded-3xl bg-purple-500"></div>
       </div>
@@ -169,6 +169,25 @@ const LoadingMessages = () => {
 
       <div className="flex">
         <div className=" p-6 px-12 m-1 rounded-3xl bg-purple-500"></div>
+      </div>
+
+      <div className="flex">
+        <div className=" p-6 px-20 m-1 rounded-3xl bg-purple-500"></div>
+      </div>
+
+      <div className="justify-end flex">
+        <div className=" p-6 px-12 m-1 rounded-3xl bg-purple-500"></div>
+      </div>
+
+      <div className="justify-end flex">
+        <div className=" p-6 px-16 m-1 rounded-3xl bg-purple-500"></div>
+      </div>
+
+      <div className="flex">
+        <div className=" p-6 px-20 m-1 rounded-3xl bg-purple-500"></div>
+      </div>
+      <div className="flex">
+        <div className=" p-6 px-20 m-1 rounded-3xl bg-purple-500"></div>
       </div>
     </div>
   );

@@ -7,7 +7,8 @@ import path from "path";
 import connectToMongoDB from "./db/connectToDataBase.js";
 import authRoute from "./routes/auth.route.js";
 import messageRoute from "./routes/message.route.js";
-import usersRoute from "./routes/conversations.route.js";
+import conversationsRoute from "./routes/conversations.route.js";
+import usersRoute from "./routes/users.route.js"
 
 dotenv.config();
 import { app, server } from "./socket/socket.js";
@@ -18,12 +19,13 @@ const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(cookieParser());
-// app.use(cors({ origin: process.env.CORS_ORIGIN_URL, credentials: true }));
+app.use(cors({ origin: process.env.CORS_ORIGIN_URL, credentials: true }));
 
 
 app.use("/auth", authRoute);
 app.use("/message", messageRoute);
-app.use("/conversations", usersRoute);
+app.use("/conversations", conversationsRoute);
+app.use("/search", usersRoute);
 
 app.use(express.static(path.join(__dirname, "/frontend/dist")))
 

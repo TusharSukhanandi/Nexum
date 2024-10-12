@@ -12,11 +12,11 @@ const useFetchMessages = () => {
   );
 
   const fetchMessages = async () => {
-
     if (!selectedConversation._id) {
       return;
     }
     try {
+      setLoading(true);
       const response = await axios.get(
         import.meta.env.VITE_API_URL +
           "/message/get/" +
@@ -26,7 +26,7 @@ const useFetchMessages = () => {
       dispatch(setMessages(response.data));
     } catch (error) {
       console.log(error);
-    }finally{
+    } finally {
       setTimeout(() => setLoading(false), 500);
     }
   };
