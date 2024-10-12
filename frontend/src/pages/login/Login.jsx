@@ -4,7 +4,7 @@ import RandomIcons from "../../componants/RandomIcons";
 import { Link } from "react-router-dom";
 import { useState, useMemo } from "react";
 import useLogIn from "../../hooks/useLogIn";
-import { AiTwotoneEye, AiOutlineEyeInvisible  } from "react-icons/ai";
+import { AiOutlineEye , AiOutlineEyeInvisible  } from "react-icons/ai";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -60,14 +60,14 @@ const Login = () => {
       <Header height={"h-[20dvh]"} />
 
       <form className="md:w-1/3 z-10 relative animate-fadeIn w-full bg-transparent h-auto md:m-auto mt-10 flex flex-col gap-7 p-10">
-        <h1 className="text-center text-white text-4xl">Log-in</h1>
+        <h1 className="text-center text-white text-4xl font-mukta">Log-in</h1>
         <div className="w-[90%] mx-auto ">
           <input
             type="text"
             placeholder="User name"
             value={inputs.userName}
             onChange={(e) => setInputs({ ...inputs, userName: e.target.value })}
-            className="w-full p-3 text-white text-center border-b-2 border-purple-500 rounded-lg bg-transparent active:border-purple-800"
+            className="w-full p-3 text-white text-center border-b-2 border-purple-500 rounded-lg bg-transparent active:border-purple-800 placeholder:font-poppins"
           />
         </div>
         <div className="w-[90%] relative mx-auto">
@@ -76,13 +76,13 @@ const Login = () => {
             placeholder="Password"
             value={inputs.password}
             onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
-            className="w-full p-3 text-white text-center border-b-2 border-purple-500 rounded-lg bg-transparent active:border-purple-800"
+            className="w-full p-3 text-white text-center border-b-2 border-purple-500 rounded-lg bg-transparent active:border-purple-800 placeholder:font-poppins"
           />
           <div
             className="text-white text-2xl bg-black absolute top-1/2 -translate-y-1/2 right-5 sm:cursor-pointer"
             onClick={() => setShowPassword(!showPassword)}
           >
-           {!showPassword ? <AiTwotoneEye /> : <AiOutlineEyeInvisible />}
+           {!showPassword ? <AiOutlineEye  /> : <AiOutlineEyeInvisible />}
           </div>
         </div>
         <div className="text-white w-[100%]">

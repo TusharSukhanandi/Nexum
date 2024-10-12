@@ -1,6 +1,7 @@
 import sendMail from "../../sendMail/sendMail.js";
 import User from "../../models/user.model.js";
 import generateTokenAndSetCookie from "../../utils/generateToken.js";
+import bcrypt from "bcryptjs";
 
 const generateOtp = (length = 6) => {
   let otp = Math.floor(Math.random() * Math.pow(10, length)).toString();
@@ -43,8 +44,10 @@ const verifyEmail = async (req, res) => {
       });
     }
 
-    const newUser = await User.create({ email, otp, otpCreatedAt });
-
+    let hashedEmail = await bcrypt.hash(email, process.env.SALT_FOR_EMAIL); 
+    
+    const newUser = await User.create({ email : hashedEmail, otp, otpCreatedAt });
+   
     if (!newUser) {
       return res.status(400).json({
         message: "somthing went wrong",
@@ -74,7 +77,9 @@ const verifyOtp = async (req, res) => {
 
     email = email.trim();
 
-    const user = await User.findOne({ email });
+    let hashedEmail = await bcrypt.hash(email, process.env.SALT_FOR_EMAIL); 
+
+    const user = await User.findOne({email : hashedEmail });
 
     if (!user) {
       return res

@@ -32,7 +32,7 @@ const Chat = () => {
 
   return ( 
     <Background>
-      <button className="block absolute text-white m-5 text-3xl left-0" ><CiSearch/></button>
+      {/* <button className="block absolute text-white m-5 text-3xl left-0" ><CiSearch/></button> */}
       <button className="block absolute text-white m-5 text-3xl right-0" onClick={handleLogout}><CiLogout/></button>
       <Header height={isMobile && selectedConversation && !selectedConversation._id ? "h-[20dvh]" : "h-[10dvh]"} />
       <div className={`sm:w-[80%] w-[100vw] m-auto sm:mt-12 sm:h-[70dvh] sm:flex ${isMobile && selectedConversation && !selectedConversation._id ? "h-[80dvh]" : "h-[90dvh]"}`} >

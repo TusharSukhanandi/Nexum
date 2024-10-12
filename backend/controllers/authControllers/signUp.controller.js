@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import User from "../../models/user.model.js";
 import generateTokenAndSetCookie from "../../utils/generateToken.js";
 
@@ -22,7 +22,9 @@ const signUp = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({ email });
+    let hashedEmail = await bcrypt.hash(email, process.env.SALT_FOR_EMAIL);
+
+    const user = await User.findOne({email : hashedEmail });
 
     if (!user) {
       return res.status(400).json({
@@ -45,11 +47,11 @@ const signUp = async (req, res) => {
 
     let hashedPassword = await bcrypt.hash(password, 10);
 
-    const placeHolderProfilepic = `https://avatar.iran.liara.run/username?username=${userName}`
+    const placeHolderProfilepic = `https://avatar.iran.liara.run/username?username=${userName}`;
 
     user.userName = userName;
     user.password = hashedPassword;
-    user.profilePicture = placeHolderProfilepic
+    user.profilePicture = placeHolderProfilepic;
 
     user.save();
 
@@ -59,7 +61,7 @@ const signUp = async (req, res) => {
       message: "user created, signed up",
       userId: user._id,
       userName,
-      profilePicture : user.profilePicture
+      profilePicture: user.profilePicture,
     });
   } catch (err) {
     console.log("error at sign Up", err);

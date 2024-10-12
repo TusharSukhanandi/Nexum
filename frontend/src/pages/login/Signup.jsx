@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import useVerifyEmail from "../../hooks/useVerifyEmail";
 import useVerifyOtp from "../../hooks/useVerifyOtp";
 import useSignUp from "../../hooks/useSignUp";
+import { AiOutlineEye , AiOutlineEyeInvisible  } from "react-icons/ai";
 
 const Signup = () => {
   const [isOtpSent, setIsOtpSent] = useState(false);
@@ -88,14 +89,14 @@ const Signup = () => {
     <Background>
       <Header height={"h-[20dvh]"} />
       <div className="md:w-1/3 z-10 relative animate-fadeIn w-full bg-transparent h-auto md:m-auto mt-10 flex flex-col gap-5 p-10">
-        <h5 className="text-center text-white text-4xl">Sign-up</h5>
+        <h5 className="text-center text-white text-4xl font-mukta">Sign-up</h5>
 
         {!isOtpSent && !isOtpCorrect ? (
           <div className="w-[90%] my-5 mx-auto ">
             <input
               type="email"
               placeholder="email"
-              className="w-full p-3 text-white text-center border-b-2 border-purple-500 rounded-lg bg-transparent active:border-purple-800"
+              className="w-full p-3 text-white text-center border-b-2 border-purple-500 rounded-lg bg-transparent active:border-purple-800 placeholder:font-poppins"
               onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
             />
           </div>
@@ -106,7 +107,7 @@ const Signup = () => {
               <input
                 type="number"
                 placeholder="Otp"
-                className="w-full p-3 text-white text-center border-b-2 border-purple-500 rounded-lg bg-transparent active:border-purple-800"
+                className="w-full p-3 text-white text-center border-b-2 border-purple-500 rounded-lg bg-transparent active:border-purple-800 placeholder:font-poppins"
                 onChange={(e) => setInputs({ ...inputs, otp: e.target.value })}
               />
               <h5
@@ -125,7 +126,7 @@ const Signup = () => {
               <input
                 type="text"
                 placeholder="User name"
-                className="w-full p-3 text-white text-center border-b-2 border-purple-500 rounded-lg bg-transparent active:border-purple-800"
+                className="w-full p-3 text-white text-center border-b-2 border-purple-500 rounded-lg bg-transparent active:border-purple-800 placeholder:font-poppins"
                 onChange={(e) =>
                   setInputs({ ...inputs, userName: e.target.value })
                 }
@@ -135,7 +136,7 @@ const Signup = () => {
               <input
                 type={showPassword ? "text" : "Password"}
                 placeholder="Password"
-                className="w-full p-3 text-white text-center border-b-2 border-purple-500 rounded-lg bg-transparent active:border-purple-800"
+                className="w-full p-3 text-white text-center border-b-2 border-purple-500 rounded-lg bg-transparent active:border-purple-800 placeholder:font-poppins"
                 onChange={(e) =>
                   setInputs({ ...inputs, password: e.target.value })
                 }
@@ -144,14 +145,14 @@ const Signup = () => {
                 className="text-white absolute top-1/2 -translate-y-1/2 right-5 sm:cursor-pointer"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                eye
+               {!showPassword ? <AiOutlineEye  /> : <AiOutlineEyeInvisible />}
               </div>
             </div>
             <div className="w-[90%] mx-auto">
               <input
                 type="Password"
                 placeholder="Confirm Password"
-                className="w-full p-3 text-white text-center border-b-2 border-purple-500 rounded-lg bg-transparent active:border-purple-800"
+                className="w-full p-3 text-white text-center border-b-2 border-purple-500 rounded-lg bg-transparent active:border-purple-800 placeholder:font-poppins"
                 onChange={(e) =>
                   setInputs({ ...inputs, confirmPassword: e.target.value })
                 }
