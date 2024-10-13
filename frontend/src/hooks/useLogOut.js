@@ -8,13 +8,15 @@ const useLogOut = () => {
   const [loading, setLoading] = useState(false);
   const showToast = useToastContext();
   const { setUser } = useUserContext();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const logOut = async () => {
     try {
       const response = await axios.post(
-        import.meta.env.VITE_API_URL + "/auth/logOut", {}, {
-          withCredentials: true ,
+        import.meta.env.VITE_API_URL + "/auth/logOut",
+        {},
+        {
+          withCredentials: true,
         }
       );
 
@@ -25,7 +27,7 @@ const useLogOut = () => {
       showToast("Logged out successfully", "info");
 
       localStorage.removeItem("Nexum-User");
-      navigate("/")
+      navigate("/");
       setUser(null);
     } catch (error) {
       const errorMessage =

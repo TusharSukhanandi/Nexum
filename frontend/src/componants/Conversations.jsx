@@ -1,22 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Conversation from "./Conversation";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedConversation } from "../redux/slices/selectConversationSlice";
+import { setConversations } from "../redux/slices/conversationsSlice";
 import useFetchConversations from "../hooks/useFetchConversations";
 
 const Conversations = () => {
+  const { loading, fetchConversations } = useFetchConversations();
+
+  // using redux because conversations were refetched on mobile because this component was getting unmounted when one of conversations was getting selected
+
   const dispatch = useDispatch();
 
-  const { loading, fetchConversations } = useFetchConversations();
-  const [conversations, setConversations] = useState([]);
+  const conversations = useSelector((state) => state.conversations);
+
+  const getConversations = async () => {
+    const conversations = await fetchConversations();
+    dispatch(setConversations(conversations));
+  };
 
   useEffect(() => {
-    const getConversations = async () => {
-      const conversations = await fetchConversations();
-      setConversations(conversations);
-    };
-
-    getConversations();
+    if (conversations.length == 0) {
+      getConversations();
+    }
   }, []);
 
   return (
