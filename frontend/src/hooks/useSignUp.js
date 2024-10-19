@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useToastContext } from "../context/toastContext";
 import axios from "axios";
 import { useUserContext } from "../context/userContext";
-import { set } from "mongoose";
 
-const useSignUp = (inputs) => {
+
+const useSignUp = () => {
   const [loadingFromSignUp, setLoadingFromSignUp] = useState(false);
 
   const showToast = useToastContext();
@@ -30,7 +30,7 @@ const useSignUp = (inputs) => {
           password,
           confirmPassword,
           email,
-        }
+        }, {withCredentials: true}
       );
 
       if (response.data.userId === "") {

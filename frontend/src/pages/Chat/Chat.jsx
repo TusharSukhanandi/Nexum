@@ -6,6 +6,7 @@ import Header from "../../componants/Header";
 import useLogOut from "../../hooks/useLogOut";
 import { useSelector } from "react-redux";
 import { CiLogout, CiSearch } from "react-icons/ci";
+import SearchUsers from "../../componants/SearchUsers";
 
 const Chat = () => {
   const { loading, logOut } = useLogOut();
@@ -14,6 +15,7 @@ const Chat = () => {
   };
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 600);
+  const [showSerach, setShowSearch] = useState(false);
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -30,11 +32,29 @@ const Chat = () => {
     (state) => state.selectConversation
   );
 
+  const closeSearch = (event, isButton) => {
+   
+    if (isButton) {
+      return setShowSearch(false);
+    }
+ 
+    if (event.target === event.currentTarget) {
+      return setShowSearch(false);
+    }
+  };
+
   return (
     <Background>
-      <button className="block absolute text-white m-5 text-3xl left-0">
+      <button
+        onClick={() => setShowSearch(true)}
+        className="block absolute text-white m-5 text-3xl left-0"
+      >
         <CiSearch />
       </button>
+
+      <div>
+        {showSerach ? <SearchUsers handleCloseSearch={closeSearch} /> : null}
+      </div>
 
       {loading ? (
         <Loading />

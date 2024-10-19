@@ -20,8 +20,7 @@ const Login = () => {
     logIn(inputs);
   };
 
-  console.log(loading);
-
+ 
   const memoizedRandomIcons = useMemo(() => {
     return (
       <div className="animate-fadeIn">

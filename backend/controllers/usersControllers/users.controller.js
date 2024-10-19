@@ -2,17 +2,16 @@ import User from "../../models/user.model.js"
 
 const users = async (req, res) => {
 
-    const {userName, limit} = req.query;
-    console.log(req.query);
-    
-    if(!userName || !limit){
-        return res.status(400).json({error : "please provide important credentials"})
-    }
+    try {
+		const loggedInUserId = req.user;
+        
+		const filteredUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-password");
 
-    const findingUsers = await User.find({ userName });
-    console.log(findingUsers);
-    
-
+		res.status(200).json(filteredUsers);
+	} catch (error) {	
+		console.log("Error in users: ", error);
+		res.status(500).json({ error: "Internal server error" });
+	}
 }
 
 export default users

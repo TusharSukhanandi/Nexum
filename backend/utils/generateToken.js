@@ -5,6 +5,7 @@ const generateTokenAndSetCookie = (userId, res) => {
         expiresIn: "15d"
     })
 
+
        return res.cookie("NexumJwt", token, {
             maxAge: 15 * 24 * 60 * 60 * 1000,
             httpOnly : true,

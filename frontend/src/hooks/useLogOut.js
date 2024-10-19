@@ -3,12 +3,16 @@ import { useState } from "react";
 import { useToastContext } from "../context/toastContext";
 import { useUserContext } from "../context/userContext";
 import { useNavigate } from "react-router-dom";
+import { removeConversations, setConversations } from "../redux/slices/conversationsSlice";
+import { clearSelectedConversation } from "../redux/slices/selectConversationSlice";
+import { useDispatch } from "react-redux";
 
 const useLogOut = () => {
   const [loading, setLoading] = useState(false);
   const showToast = useToastContext();
   const { setUser } = useUserContext();
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const logOut = async () => {
     try {
@@ -23,6 +27,9 @@ const useLogOut = () => {
       if (!response.data) {
         showToast("something went wrong", "error");
       }
+
+      dispatch(removeConversations())
+      dispatch(clearSelectedConversation())
 
       showToast("Logged out successfully", "info");
 

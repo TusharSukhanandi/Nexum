@@ -1,4 +1,6 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
+import Background from "./Background";
 
 const SearchChat = () => {
   return (

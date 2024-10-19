@@ -7,6 +7,7 @@ import { ToastProvider } from "./context/toastContext.jsx";
 import { useUserContext } from "./context/userContext.jsx";
 import Chat from "./pages/Chat/Chat.jsx";
 import { SocketContextProvider } from "./context/socketContex.jsx";
+import SearchUsers from "./componants/SearchUsers.jsx";
 
 function App() {
   const { user } = useUserContext();

@@ -53,7 +53,7 @@ const signUp = async (req, res) => {
     user.password = hashedPassword;
     user.profilePicture = placeHolderProfilepic;
 
-    user.save();
+    await user.save();
 
     generateTokenAndSetCookie(user._id, res);
 
