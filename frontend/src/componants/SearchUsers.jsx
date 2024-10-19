@@ -5,18 +5,19 @@ import Conversation from "./Conversation";
 import { setSelectedConversation } from "../redux/slices/selectConversationSlice";
 import { addConversations } from "../redux/slices/conversationsSlice";
 import { MdClose } from "react-icons/md";
+import LoadingConversation from "./LoadingConversation";
 
 const SearchUsers = ({ handleCloseSearch }) => {
   const [search, setSearch] = useState("");
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     const result = users.filter((user) => user.userName.includes(search));
- 
+
     setFilteredUsers(result);
   }, [search, users]);
 
@@ -25,17 +26,22 @@ const SearchUsers = ({ handleCloseSearch }) => {
   }, []);
 
   const getUsers = async () => {
-    const response = await axios.get(
-      `${import.meta.env.VITE_API_URL}/search/users`,
-      { withCredentials: true }
-    );
-   
-    setUsers(response.data);
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/search/users`,
+        { withCredentials: true }
+      );
+      setUsers(response.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputRef = useRef(null);
 
-  // Focus on the input when the component mounts
   useEffect(() => {
     inputRef.current.focus();
   }, []);
@@ -52,8 +58,8 @@ const SearchUsers = ({ handleCloseSearch }) => {
             ref={inputRef}
             type="text"
             placeholder="search"
-            onChange={(e) => { 
-              setSearch(e.target.value)      
+            onChange={(e) => {
+              setSearch(e.target.value);
             }}
           />
         </div>
@@ -65,7 +71,10 @@ const SearchUsers = ({ handleCloseSearch }) => {
           <MdClose />
         </button>
 
-        {filteredUsers &&
+        {loading ? (
+          <LoadingConversation />
+        ) : (
+          filteredUsers &&
           filteredUsers.map((user, index) => (
             <div
               className="mt-3 transition-all  "
@@ -91,10 +100,12 @@ const SearchUsers = ({ handleCloseSearch }) => {
               <Conversation conversation={user}></Conversation>
               <div className=""></div>
             </div>
-          ))}
+          ))
+        )}
       </div>
     </div>
   );
 };
 
 export default SearchUsers;
+

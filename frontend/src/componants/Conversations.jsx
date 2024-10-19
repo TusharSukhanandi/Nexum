@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSelectedConversation } from "../redux/slices/selectConversationSlice";
 import { setConversations } from "../redux/slices/conversationsSlice";
 import useFetchConversations from "../hooks/useFetchConversations";
+import LoadingConversation from "./LoadingConversation";
 
 const Conversations = () => {
   const { loading, fetchConversations } = useFetchConversations();
@@ -28,7 +29,7 @@ const Conversations = () => {
   return (
     <>
       {loading ? (
-        <Loading />
+        <LoadingConversation />
       ) : (
         <div className="w-full mt-7">
           {conversations &&
@@ -53,23 +54,6 @@ const Conversations = () => {
         </div>
       )}
     </>
-  );
-};
-
-const Loading = () => {
-  return (
-    <div className="w-full h-auto mt-6 text-white">
-      <PlaceHolderConversation />
-      <PlaceHolderConversation />
-      <PlaceHolderConversation />
-      <PlaceHolderConversation />
-    </div>
-  );
-};
-
-const PlaceHolderConversation = () => {
-  return (
-    <div className="animate-pulse text-center bg-purple-400 opacity-15  w-[90%] m-auto rounded-lg text-white h-16 sm:h-14 text-xl mt-2"></div>
   );
 };
 
