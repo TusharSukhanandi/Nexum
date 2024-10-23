@@ -15,6 +15,7 @@ const useLogOut = () => {
   const dispatch = useDispatch()
 
   const logOut = async () => {
+    setLoading(true)
     try {
       const response = await axios.post(
         import.meta.env.VITE_API_URL + "/auth/logOut",
