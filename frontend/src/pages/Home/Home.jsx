@@ -3,8 +3,6 @@ import RandomIcons from "../../componants/RandomIcons";
 import Header from "../../componants/Header";
 import Background from "../../componants/Background";
 import { Link } from "react-router-dom";
-import Toast from "../../componants/Toast";
-import useLogOut from "../../hooks/useLogOut";
 
 const Home = () => {
 

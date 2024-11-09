@@ -16,7 +16,8 @@ const Login = () => {
     password: "",
   });
 
-  const handleLogin = () => {
+  const handleLogin = (event) => {
+    event.preventDefault()
     logIn(inputs);
   };
 

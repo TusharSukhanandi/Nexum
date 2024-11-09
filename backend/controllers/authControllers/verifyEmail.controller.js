@@ -1,6 +1,5 @@
 import sendMail from "../../sendMail/sendMail.js";
 import User from "../../models/user.model.js";
-import generateTokenAndSetCookie from "../../utils/generateToken.js";
 import bcrypt from "bcryptjs";
 
 const generateOtp = (length = 6) => {

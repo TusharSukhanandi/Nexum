@@ -114,7 +114,7 @@ const Messages = ({ isMobile }) => {
             </div>
           )}
 
-          <div className="h-[10%] w-[90%] m-auto flex justify-evenly items-center ">
+          <form className="h-[10%] w-[90%] m-auto flex justify-evenly items-center ">
             <input
               className="w-[80%] sm:px-3 sm:py-1 p-3 text-white border-b-2 border-purple-500 bg-transparent font-poppins"
               onChange={(e) => setMessage(e.target.value)}
@@ -127,7 +127,7 @@ const Messages = ({ isMobile }) => {
                 <IoSend className="text-3xl text-white hover:text-purple-600 transition-all" />
               </button>
             </div>
-          </div>
+          </form>
         </div>
       )}
     </>
