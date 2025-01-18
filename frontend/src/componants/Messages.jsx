@@ -81,10 +81,10 @@ const Messages = ({ isMobile }) => {
         <PlaceHolderComponent />
       ) : (
         <div className="sm:w-[70%] sm:h-[70dvh] h-full  ">
-          <div className="flex sm:h-[15%] h-[10%] sm:w-[90%] relative p-5 justify-start items-center  ">
+          <div className="flex sm:h-[15%] h-[8%] m-auto sm:w-[90%] relative p-5 justify-start items-center ">
             {isMobile ? (
               <div
-                className="text-white ml-2 text-3xl"
+                className="text-white ml-2 text-2xl"
                 onClick={() => dispatch(clearSelectedConversation())}
               >
                 <IoMdArrowRoundBack />
@@ -108,13 +108,13 @@ const Messages = ({ isMobile }) => {
             </h2>
           </div>
           {!isMobile ? (
-            <div className="w-2/3 h-[1px] mt-2 m-auto bg-white"></div>
+            <div className="w-2/3 h-[1px] mt-2 mb-2 m-auto bg-white"></div>
           ) : null}
 
           {loading ? (
             <LoadingMessages />
           ) : (
-            <div className="animate-fadeIn h-[75%] sm:my-0 my-2 w-[90%] m-auto overflow-scroll no-scrollbar ">
+            <div className="animate-fadeIn h-[75%] sm:my-0 my-2 w-[90%] mx-auto overflow-scroll no-scrollbar ">
               {renderedMessages}
             </div>
           )}

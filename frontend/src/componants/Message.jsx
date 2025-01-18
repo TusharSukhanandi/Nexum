@@ -34,7 +34,7 @@ const Message = ({ message, isSent, time }) => {
     <>
       {/* sent and recived message color */}
       <div
-        className={`bg-purple-600 flex flex-col text-white max-w-[75%] break-words font-poppins p-3 px-4 m-1 rounded-3xl`}
+        className={`bg-purple-600 border-2 border-purple-900 flex flex-col text-white max-w-[75%] break-words font-poppins p-[10px] px-4 m-1 rounded-3xl`}
       >
         <h4>{message}</h4>
         <span
