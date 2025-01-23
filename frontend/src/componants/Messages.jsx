@@ -119,17 +119,17 @@ const Messages = ({ isMobile }) => {
             </div>
           )}
 
-          <form className="h-[10%] w-[90%] m-auto flex justify-evenly items-center ">
+          <form className="h-[8%] md:h-[12%] pl-2 w-[88%] mt-2 bg-purple-600 rounded-3xl border-2 backdrop-blur-md shadow-lg border-purple-950 m-auto flex justify-evenly items-center ">
             <input
-              className="w-[80%] sm:px-3 sm:py-1 p-3 text-white border-b-2 border-purple-500 bg-transparent font-poppins"
+              className="w-[100%] sm:px-3 text-l text-white bg-transparent font-poppins focus:outline-none active:outline-none"
               onChange={(e) => setMessage(e.target.value)}
               value={message}
             ></input>
 
-            <div className="sm:mt-2 pt-1">
-              <button type="submit" onClick={handleSendMessage}>
+            <div onClick={handleSendMessage} className=" bg-black p-2 rounded-3xl flex justify-center items-center cursor-pointer m-2 hover:bg-purple-800 transition-all duration-500">
+              <button type="submit" >
                 {" "}
-                <IoSend className="text-3xl text-white hover:text-purple-600 transition-all" />
+                <IoSend className="text-xl mb-1 ml-1 -rotate-[30deg] text-white" />
               </button>
             </div>
           </form>
@@ -155,7 +155,7 @@ const PlaceHolderComponent = () => {
 
 const LoadingMessages = () => {
   return (
-    <div className="animate-pulse h-[70%] overflow-hidden sm:my-0 my-2 w-[90%] m-auto">
+    <div className="animate-pulse h-[75%] overflow-hidden sm:my-0 my-2 w-[90%] m-auto">
       <div className="justify-end flex">
         <div className=" p-6 px-12 m-1 rounded-3xl bg-purple-500"></div>
       </div>

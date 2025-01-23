@@ -3,17 +3,13 @@ import Background from "../../componants/Background";
 import ConversationSideBar from "../../componants/ConversationSideBar";
 import Messages from "../../componants/Messages";
 import Header from "../../componants/Header";
-import useLogOut from "../../hooks/useLogOut";
 import { useSelector } from "react-redux";
-import { CiLogout, CiSearch } from "react-icons/ci";
+import { CiSearch } from "react-icons/ci";
 import SearchUsers from "../../componants/SearchUsers";
+import ProfileIcon from "../../componants/ProfileIcon";
+import LogOut from "../../componants/LogOut";
 
 const Chat = () => {
-  const { loading, logOut } = useLogOut();
-  const handleLogout = () => {
-    logOut();
-  };
-
   const [isMobile, setIsMobile] = useState(window.innerWidth < 600);
   const [showSerach, setShowSearch] = useState(false);
 
@@ -33,11 +29,10 @@ const Chat = () => {
   );
 
   const closeSearch = (event, isButton) => {
-   
     if (isButton) {
       return setShowSearch(false);
     }
- 
+
     if (event.target === event.currentTarget) {
       return setShowSearch(false);
     }
@@ -56,17 +51,7 @@ const Chat = () => {
         {showSerach ? <SearchUsers handleCloseSearch={closeSearch} /> : null}
       </div>
 
-      {loading ? (
-        <Loading />
-      ) : (
-        <button
-          className="block absolute text-white m-5 text-3xl right-0"
-          disabled={loading}
-          onClick={handleLogout}
-        >
-          <CiLogout />
-        </button>
-      )}
+      <ProfileIcon />
 
       <Header
         height={
@@ -102,9 +87,3 @@ const Chat = () => {
 };
 
 export default Chat;
-
-const Loading = () => {
-  return (
-    <div className="w-7 h-7 m-5 absolute bg-white right-0 rounded-lg animate-spin"></div>
-  );
-};
