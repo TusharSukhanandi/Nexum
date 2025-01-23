@@ -114,20 +114,29 @@ const Messages = ({ isMobile }) => {
           {loading ? (
             <LoadingMessages />
           ) : (
-            <div className="animate-fadeIn h-[75%] sm:my-0 my-2 w-[90%] mx-auto overflow-scroll no-scrollbar ">
+            <div className="animate-fadeIn md:h-[75%] h-[78%] sm:my-0 my-2 w-[90%] mx-auto overflow-scroll no-scrollbar ">
               {renderedMessages}
             </div>
           )}
 
-          <form className="h-[8%] md:h-[12%] pl-2 w-[88%] mt-2 bg-purple-600 rounded-3xl border-2 backdrop-blur-md shadow-lg border-purple-950 m-auto flex justify-evenly items-center ">
+          <form
+            className="h-[8%] md:h-[12%] md:pl-2 pl-5 w-[88%] mt-2 bg-purple-600 rounded-3xl border-2 backdrop-blur-md shadow-lg border-purple-950 m-auto flex justify-evenly items-center "
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSendMessage(); 
+            }}
+          >
             <input
               className="w-[100%] sm:px-3 text-l text-white bg-transparent font-poppins focus:outline-none active:outline-none"
               onChange={(e) => setMessage(e.target.value)}
               value={message}
             ></input>
 
-            <div onClick={handleSendMessage} className=" bg-black p-2 rounded-3xl flex justify-center items-center cursor-pointer m-2 hover:bg-purple-800 transition-all duration-500">
-              <button type="submit" >
+            <div
+              onClick={handleSendMessage}
+              className=" bg-black p-2 rounded-3xl flex justify-center items-center cursor-pointer m-2 hover:bg-purple-800 transition-all duration-500"
+            >
+              <button type="submit">
                 {" "}
                 <IoSend className="text-xl mb-1 ml-1 -rotate-[30deg] text-white" />
               </button>
@@ -155,8 +164,8 @@ const PlaceHolderComponent = () => {
 
 const LoadingMessages = () => {
   return (
-    <div className="animate-pulse h-[75%] overflow-hidden sm:my-0 my-2 w-[90%] m-auto">
-      <div className="justify-end flex">
+    <div className="animate-pulse md:h-[75%] h-[78%] overflow-scroll no-scrollbar sm:my-0 my-2 w-[90%] m-auto">
+      <div className="justify-end flex ">
         <div className=" p-6 px-12 m-1 rounded-3xl bg-purple-500"></div>
       </div>
 
