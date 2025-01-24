@@ -9,6 +9,7 @@ import useReceiveMessage from "../hooks/useReceiveMessage";
 import { useSocketContext } from "../context/socketContex";
 import { clearSelectedConversation } from "../redux/slices/selectConversationSlice";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { addMessage } from "../redux/slices/messagesSlice";
 
 const Messages = ({ isMobile }) => {
   const { user } = useUserContext();
@@ -28,7 +29,12 @@ const Messages = ({ isMobile }) => {
 
   const lastMessageRef = useRef();
 
-  const scrollUp = () => {
+  const scrollUp = (button) => {
+    // if(button){
+    //   lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
+    //   return
+    // }
+
     setTimeout(() => {
       lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 1000);
@@ -45,7 +51,12 @@ const Messages = ({ isMobile }) => {
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (message !== "") {
+      console.log(message);
+
+      dispatch(addMessage({ message, senderId: user.userId }));
+
       sendMessage(message);
+
       setMessage("");
     }
   };
@@ -114,8 +125,10 @@ const Messages = ({ isMobile }) => {
           {loading ? (
             <LoadingMessages />
           ) : (
-            <div className="animate-fadeIn md:h-[75%] h-[78%] sm:my-0 my-2 w-[90%] mx-auto overflow-scroll no-scrollbar ">
+            <div className="animate-fadeIn relative md:h-[75%] h-[78%] sm:my-0 my-2 w-[90%] mx-auto overflow-scroll no-scrollbar ">
               {renderedMessages}
+              {/* scroll up button */}
+              {/* <button onClick={() => scrollUp(true)} className="sticky bottom-0  w-10 h-10 bg-red-500">{">"}</button> */}
             </div>
           )}
 
@@ -123,7 +136,7 @@ const Messages = ({ isMobile }) => {
             className="h-[8%] md:h-[12%] md:pl-2 pl-5 w-[88%] mt-2 bg-purple-600 rounded-3xl border-2 backdrop-blur-md shadow-lg border-purple-950 m-auto flex justify-evenly items-center "
             onSubmit={(e) => {
               e.preventDefault();
-              handleSendMessage(); 
+              handleSendMessage();
             }}
           >
             <input
