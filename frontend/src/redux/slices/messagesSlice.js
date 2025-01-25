@@ -8,7 +8,7 @@
                 return action.payload
             },
             addMessage: (state, action) => {
-                state[state.length - 1] = action.payload
+                state[state.length] = action.payload
             }
         }
     })
