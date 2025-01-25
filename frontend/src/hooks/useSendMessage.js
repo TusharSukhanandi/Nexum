@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useToastContext } from "../context/toastContext";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios"
-import { addMessage } from "../redux/slices/messagesSlice";
+import { replaceMessage } from "../redux/slices/messagesSlice";
 
 
 const useSendMessage = () => {
@@ -29,10 +29,10 @@ const useSendMessage = () => {
         { withCredentials: true }
       );   
       if(response){
-        dispatch(addMessage(response.data))
+        dispatch(replaceMessage(response.data))
       }
     } catch (error) {
-      console.log("error at send message");
+      console.log("error at send message", error);
       showToast(error?.response?.data?.message);
     }finally{
         setLoading(false)

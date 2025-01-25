@@ -53,7 +53,7 @@ const Messages = ({ isMobile }) => {
     if (message !== "") {
       console.log(message);
 
-      dispatch(addMessage({ message, senderId: user.userId }));
+      dispatch(addMessage({ message, senderId: user.userId, _id : 562 }));
 
       sendMessage(message);
 

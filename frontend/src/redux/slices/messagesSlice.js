@@ -8,10 +8,13 @@
                 return action.payload
             },
             addMessage: (state, action) => {
+                state.push(action.payload)
+            },
+            replaceMessage:(state, action)=>{
                 state[state.length] = action.payload
             }
         }
     })
 
-    export const {setMessages, addMessage} = messagesSlice.actions;
+    export const {setMessages, addMessage, replaceMessage} = messagesSlice.actions;
     export default messagesSlice.reducer;
