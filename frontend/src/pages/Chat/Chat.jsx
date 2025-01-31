@@ -40,18 +40,10 @@ const Chat = () => {
 
   return (
     <Background>
-      <button
-        onClick={() => setShowSearch(true)}
-        className="block absolute text-white m-5 text-3xl left-0"
-      >
-        <CiSearch />
-      </button>
-
+    
       <div>
         {showSerach ? <SearchUsers handleCloseSearch={closeSearch} /> : null}
       </div>
-
-      <ProfileIcon />
 
       <Header
         height={
@@ -59,9 +51,12 @@ const Chat = () => {
             ? "h-[20dvh]"
             : "h-[10dvh]"
         }
+
+        setShowSearch={setShowSearch}
       />
+      {/* //subBackground */}
       <div
-        className={`sm:w-[80%] w-[100vw] m-auto sm:mt-12 sm:h-[70dvh] sm:flex ${
+        className={`sm:w-[80%] w-[100vw] m-auto sm:mt-12 bg-[#D9D9D9] md:rounded-3xl rounded-t-3xl md:h-[78vh] sm:flex ${
           isMobile && selectedConversation && !selectedConversation._id
             ? "h-[80dvh]"
             : "h-[90dvh]"

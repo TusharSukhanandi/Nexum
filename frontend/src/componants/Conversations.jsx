@@ -31,7 +31,7 @@ const Conversations = () => {
       {loading ? (
         <LoadingConversation />
       ) : conversations.length > 0 ? (
-        <div className="w-full mt-7">
+        <div className="w-full mt-7 ">
           {conversations &&
             conversations.map((conversation) => (
               <div
@@ -53,7 +53,7 @@ const Conversations = () => {
             ))}
         </div>
       ) : (
-        <div className="text-white text-2xl flex flex-col gap-2 justify-center items-center w-full h-[50dvh] text-center font-poppins">You don't have any conversations yet, <div>search user by username</div></div>
+        <div className=" text-2xl flex flex-col gap-2 justify-center items-center w-full h-[50dvh] text-center font-poppins">You don't have any conversations yet, <div>search user by username</div></div>
       )}
     </>
   );

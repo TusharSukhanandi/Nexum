@@ -19,11 +19,11 @@ function getFormatedTime(time) {
     delete readableDateAndTimeFormate[2];
     let formatedTime =
       readableDateAndTimeFormate[0] + ":" + readableDateAndTimeFormate[1];
-    return formatedTime + " pm";
+    return formatedTime + " am";
   } else {
     let formatedTime =
       hour + ":" + readableDateAndTimeFormate[1];
-    return formatedTime + " am";
+    return formatedTime + " pm";
   }
 }
 
@@ -34,14 +34,15 @@ const Message = ({ message, isSent, time }) => {
     <>
       {/* sent and recived message color */}
       <div
-        className={`bg-purple-600 border-2 border-purple-900 flex flex-col text-white max-w-[75%] break-words font-poppins p-[10px] px-4 m-1 rounded-3xl`}
+        className={`${isSent ? "bg-[#CDBEA8] text-black" : "bg-[#6E473B] text-white border-2 border-[#6E473B]"} border-2 border-[#CDBEA8] flex flex-col  max-w-[75%] break-words font-poppins p-[10px] px-4 m-1 mb-2 rounded-3xl`}
+        // className={`bg-purple-600 border-2 border-purple-900 flex flex-col text-white max-w-[75%] break-words font-poppins p-[10px] px-4 m-1 mb-2 rounded-3xl`}
       >
         <h4>{message}</h4>
         <span
-          className={`text-gray-400 text-xs ${
-            isSent ? " text-right" : "text-left"
+          className={`text-xs ${
+            isSent ? " text-right text-gray-700" : "text-left text-gray-400"
           }`}
-        >
+        > 
           {formatedTime}
         </span>
       </div>

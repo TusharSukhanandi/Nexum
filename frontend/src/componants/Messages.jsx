@@ -91,17 +91,17 @@ const Messages = ({ isMobile }) => {
       {!selectedConversation._id ? (
         <PlaceHolderComponent />
       ) : (
-        <div className="sm:w-[70%] sm:h-[70dvh] h-full  ">
-          <div className="flex sm:h-[15%] h-[8%] m-auto sm:w-[90%] relative p-5 justify-start items-center ">
+        <div className="sm:w-[70%] sm:h-[70dvh] h-full md:min-h-full">
+          <div className="flex sm:h-[15%] h-[10%] m-auto sm:w-[90%] md:p-0 p-3 relative justify-start items-center ">
             {isMobile ? (
               <div
-                className="text-white ml-2 text-2xl"
+                className=" ml-2 text-2xl"
                 onClick={() => dispatch(clearSelectedConversation())}
               >
                 <IoMdArrowRoundBack />
               </div>
             ) : null}
-            <div className="animate-fadeIn relative text-xs text-white rounded-full w-10 ml-5 ">
+            <div className="animate-fadeIn relative text-xs rounded-full md:w-12 w-12 ml-5 ">
               <img
                 src={
                   selectedConversation && selectedConversation.profilePicture
@@ -113,19 +113,19 @@ const Messages = ({ isMobile }) => {
                 <div className="animate-fadeIn absolute w-2 h-2 rounded-full bg-green-500 right-[2px] bottom-[2px]"></div>
               ) : null}
             </div>
-            <h2 className="animate-fadeIn text-center text-white text-2xl ml-2 p-2 font-poppins">
+            <h2 className="animate-fadeIn text-center  text-2xl ml-2 p-2 font-poppins">
               {" "}
               {selectedConversation && selectedConversation.userName}{" "}
             </h2>
           </div>
           {!isMobile ? (
-            <div className="w-2/3 h-[1px] mt-2 mb-2 m-auto bg-white"></div>
+            <div className="w-[70%] h-[1px] mb-2 m-auto bg-black"></div>
           ) : null}
 
           {loading ? (
             <LoadingMessages />
           ) : (
-            <div className="animate-fadeIn relative md:h-[75%] h-[78%] sm:my-0 my-2 w-[90%] mx-auto overflow-scroll no-scrollbar ">
+            <div className="animate-fadeIn relative md:h-[68%] h-[78%] sm:my-0 my-2 w-[90%] mx-auto overflow-scroll no-scrollbar ">
               {renderedMessages}
               {/* scroll up button */}
               {/* <button onClick={() => scrollUp(true)} className="sticky bottom-0  w-10 h-10 bg-red-500">{">"}</button> */}
@@ -133,14 +133,14 @@ const Messages = ({ isMobile }) => {
           )}
 
           <form
-            className="h-[8%] md:h-[12%] md:pl-2 pl-5 w-[88%] mt-2 bg-purple-600 rounded-3xl border-2 backdrop-blur-md shadow-lg border-purple-950 m-auto flex justify-evenly items-center "
+            className="h-[8%] md:h-[10%] md:pl-2 pl-5 w-[88%] mt-2 bg-[#A78D78] rounded-2xl border-2 backdrop-blur-md shadow-lg border-[#6E473B] m-auto flex justify-evenly items-center "
             onSubmit={(e) => {
               e.preventDefault();
               handleSendMessage();
             }}
           >
             <input
-              className="w-[100%] sm:px-3 text-l text-white bg-transparent font-poppins focus:outline-none active:outline-none"
+              className="w-[100%] sm:px-3 text-l text-white font-medium bg-transparent font-poppins focus:outline-none active:outline-none"
               onChange={(e) => setMessage(e.target.value)}
               value={message}
             ></input>
@@ -166,7 +166,7 @@ export default Messages;
 const PlaceHolderComponent = () => {
   const { user } = useUserContext();
   return (
-    <div className="w-[70%] h-[70dvh] text-white flex justify-center items-center font-mukta ">
+    <div className="w-[70%] h-[70dvh] flex justify-center items-center font-mukta ">
       <div className="mb-16 flex flex-col items-center ">
         <div className="text-6xl">Hello, {user && user.userName}</div>
         <div className="text-2xl">select someone to talk to</div>
@@ -177,44 +177,44 @@ const PlaceHolderComponent = () => {
 
 const LoadingMessages = () => {
   return (
-    <div className="animate-pulse md:h-[75%] h-[78%] overflow-scroll no-scrollbar sm:my-0 my-2 w-[90%] m-auto">
+    <div className="animate-pulse md:h-[68%] h-[78%] overflow-scroll no-scrollbar sm:my-0 my-2 w-[90%] m-auto">
       <div className="justify-end flex ">
-        <div className=" p-6 px-12 m-1 rounded-3xl bg-purple-500"></div>
+        <div className=" p-6 px-12 m-1 rounded-3xl bg-[#6E473B]"></div>
       </div>
 
       <div className="flex">
-        <div className=" p-6 px-20 m-1 rounded-3xl bg-purple-500"></div>
+        <div className=" p-6 px-20 m-1 rounded-3xl bg-[#6E473B]"></div>
       </div>
 
       <div className="justify-end flex">
-        <div className=" p-6 px-12 m-1 rounded-3xl bg-purple-500"></div>
+        <div className=" p-6 px-12 m-1 rounded-3xl bg-[#6E473B]"></div>
       </div>
 
       <div className="justify-end flex">
-        <div className=" p-6 px-16 m-1 rounded-3xl bg-purple-500"></div>
+        <div className=" p-6 px-16 m-1 rounded-3xl bg-[#6E473B]"></div>
       </div>
 
       <div className="flex">
-        <div className=" p-6 px-12 m-1 rounded-3xl bg-purple-500"></div>
+        <div className=" p-6 px-12 m-1 rounded-3xl bg-[#6E473B]"></div>
       </div>
 
       <div className="flex">
-        <div className=" p-6 px-20 m-1 rounded-3xl bg-purple-500"></div>
+        <div className=" p-6 px-20 m-1 rounded-3xl bg-[#6E473B]"></div>
       </div>
 
       <div className="justify-end flex">
-        <div className=" p-6 px-12 m-1 rounded-3xl bg-purple-500"></div>
+        <div className=" p-6 px-12 m-1 rounded-3xl bg-[#6E473B]"></div>
       </div>
 
       <div className="justify-end flex">
-        <div className=" p-6 px-16 m-1 rounded-3xl bg-purple-500"></div>
+        <div className=" p-6 px-16 m-1 rounded-3xl bg-[#6E473B]"></div>
       </div>
 
       <div className="flex">
-        <div className=" p-6 px-20 m-1 rounded-3xl bg-purple-500"></div>
+        <div className=" p-6 px-20 m-1 rounded-3xl bg-[#6E473B]"></div>
       </div>
       <div className="flex">
-        <div className=" p-6 px-20 m-1 rounded-3xl bg-purple-500"></div>
+        <div className=" p-6 px-20 m-1 rounded-3xl bg-[#6E473B]"></div>
       </div>
     </div>
   );
