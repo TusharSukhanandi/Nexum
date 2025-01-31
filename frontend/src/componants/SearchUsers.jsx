@@ -55,7 +55,7 @@ const SearchUsers = ({ handleCloseSearch }) => {
       onClick={(e) => handleCloseSearch(e, false)}
       className="animate-fadeIn w-[100%] h-[100%] absolute flex justify-center items-center bg-gray-800/75 z-40"
     >
-      <div className="relative w-[90%] md:w-[50%] h-[80%] rounded-xl overflow-auto no-scrollbar  bg-purple-500/45 shadow-lg backdrop-blur-md py-5">
+      <div className="relative w-[90%] md:w-[50%] h-[80%] rounded-xl overflow-auto no-scrollbar  bg-[#D9D9D9] shadow-lg backdrop-blur-md py-5">
         <div className="md:w-[80%] w-[100%] m-auto p-5 md:gap-9 gap-3 flex justify-around ">
           <input
             className="w-full p-3 text-white text-center border-b-2 border-white rounded-lg bg-transparent focus:outline-none placeholder:font-poppins"

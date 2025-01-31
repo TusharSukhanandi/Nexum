@@ -15,7 +15,7 @@ const Conversation = ({ conversation }) => {
             <div className="absolute h-2 w-2 rounded-full bg-green-500 right-[2px] bottom-[2px]"></div>
           ) : null}
         </div>
-        <h4 className="mb-1 text-white animate-fadeIn">{conversation.userName}</h4>
+        <h4 className="mb-1 text-black font-poppins animate-fadeIn">{conversation.userName}</h4>
       </div>
     </>
   );
