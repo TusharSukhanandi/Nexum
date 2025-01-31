@@ -9,7 +9,7 @@ const Conversation = ({ conversation }) => {
     <>
       {/* add color of chat choice box color */}
       <div className="text-center w-[90%] m-auto bg-[#c7b293] rounded-lg flex justify-start items-center gap-4 h-20 sm:h-16 text-xl mt-2 hover:bg-[#a39277] sm:cursor-pointer duration-500 transition-all "> 
-        <div className="animate-fadeIn rounded-full border-x-2 border-y-2 p-[2px] border-white md:w-10 w-12 ml-5 relative ">
+        <div className="animate-fadeIn rounded-full border-x-2 border-y-2 p-[2px] border-white md:w-10 w-12 md:min-h-10 min-h-12 ml-5 relative transition-all duration-200">
           <img className=" text-xs " src={conversation.profilePicture} alt="profilePicture" />
           {isOnline && isOnline ? (
             <div className="absolute h-2 w-2 rounded-full bg-green-500 right-[2px] bottom-[2px]"></div>
