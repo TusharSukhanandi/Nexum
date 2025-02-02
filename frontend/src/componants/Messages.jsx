@@ -44,6 +44,18 @@ const Messages = ({ isMobile }) => {
     scrollUp();
   }, [messages]);
 
+  useEffect(() => {
+    const handleBackButton = () => {
+      dispatch(clearSelectedConversation())
+    };
+  
+    window.addEventListener("popstate", handleBackButton);
+  
+    return () => {
+      window.removeEventListener("popstate", handleBackButton);
+    };
+  }, []);
+
   const [message, setMessage] = useState("");
   const { sendMessage } = useSendMessage();
   const { loading, fetchMessages } = useFetchMessages();

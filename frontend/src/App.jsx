@@ -11,6 +11,7 @@ import SearchUsers from "./componants/SearchUsers.jsx";
 
 function App() {
   const { user } = useUserContext();
+
   return (
     <>
       <SocketContextProvider>
@@ -20,7 +21,6 @@ function App() {
               path="/"
               element={user ? <Navigate to="/Chat" /> : <Home />}
             />
-            <Route path="/Chat" element={<Chat />} />
             <Route
               path="/login"
               element={user ? <Navigate to="/Chat" /> : <Login />}
@@ -28,6 +28,10 @@ function App() {
             <Route
               path="/Signup"
               element={user ? <Navigate to="/Chat" /> : <Signup />}
+            />
+            <Route
+              path="/Chat"
+              element={user ? <Chat /> : <Navigate to="/login" />}
             />
           </Routes>
         </ToastProvider>
