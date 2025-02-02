@@ -15,7 +15,7 @@ const LogOut = () => {
         <Loading />
       ) : (
         <button
-          className="block absolute text-white m-5 text-3xl right-0"
+          className="absolute text-3xl m-6  text-black"
           disabled={loading}
           onClick={handleLogout}
         >

@@ -39,7 +39,7 @@ const Chat = () => {
       />
       {/* //subBackground */}
      
-     <SubChat/>
+     <SubChat setIsMobileForPage={setIsMobileForPage}/>
       
     </Background>
   );

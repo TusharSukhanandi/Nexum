@@ -23,10 +23,10 @@ export default {
           '100%': { opacity: '1' },
         },
         shrinkExpand: {
-          "0%": { width: "80%" },
-          "30%": { width: "85%" }, // Slight expansion
-          "80%": { width: "49%" }, // Goes smaller than target
-          "100%": { width: "50%" } // Final state
+          "0%": { width: "70%" },
+          "30%": { width: "72%" }, // Slight expansion
+          "80%": { width: "34%" }, // Goes smaller than target
+          "100%": { width: "35%" } // Final state
         }
        
       },

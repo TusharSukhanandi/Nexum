@@ -31,7 +31,7 @@ const SubChat = ({setIsMobileForPage}) => {
 
   return (
     <div
-        className={`${profileScreen ? "md:animate-shrinkExpand" : "md:w-[80%] "}  m-auto sm:mt-12 bg-[#D9D9D9] md:rounded-3xl rounded-t-3xl md:h-[78vh] sm:flex ${
+        className={`${profileScreen ? "md:animate-shrinkExpand" : "md:w-[70%] "}  m-auto sm:mt-12 bg-[#D9D9D9] md:rounded-3xl rounded-t-3xl md:h-[78vh] sm:flex ${
           isMobile && selectedConversation && !selectedConversation._id
             ? "h-[80dvh]"
             : "h-[90dvh]"
