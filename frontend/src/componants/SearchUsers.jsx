@@ -7,7 +7,7 @@ import { addConversations } from "../redux/slices/conversationsSlice";
 import { MdClose } from "react-icons/md";
 import LoadingConversation from "./LoadingConversation";
 
-const SearchUsers = ({ handleCloseSearch }) => {
+const SearchUsers = () => {
   const [search, setSearch] = useState("");
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -51,68 +51,63 @@ const SearchUsers = ({ handleCloseSearch }) => {
   }, []);
 
   return (
-    <div
-      onClick={(e) => handleCloseSearch(e, false)}
-      className="animate-fadeIn w-[100%] h-[100%] absolute flex justify-center items-center bg-gray-800/75 z-40"
-    >
-      <div className="relative w-[90%] md:w-[50%] h-[80%] rounded-xl overflow-auto no-scrollbar  bg-[#D9D9D9] shadow-lg backdrop-blur-md py-5">
-        <div className="md:w-[80%] w-[100%] m-auto p-5 md:gap-9 gap-3 flex justify-around ">
-          <input
-            className="w-full p-3 text-white text-center border-b-2 border-white rounded-lg bg-transparent focus:outline-none placeholder:font-poppins"
-            ref={inputRef}
-            type="text"
-            placeholder="search"
-            onChange={(e) => {
-              setSearch(e.target.value);
-            }}
-          />
-        </div>
+    <div className="relative w-[90%] md:w-[50%] h-[80%] rounded-xl overflow-auto no-scrollbar  bg-[#D9D9D9] shadow-lg backdrop-blur-md py-5">
+      <div className="md:w-[80%] w-[100%] m-auto p-5 md:gap-9 gap-3 flex justify-around ">
+        <input
+          className="w-full p-3 text-white text-center border-b-2 border-white rounded-lg bg-transparent focus:outline-none placeholder:font-poppins"
+          ref={inputRef}
+          type="text"
+          placeholder="search"
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+        />
+      </div>
 
-        <button
-          onClick={(e) => handleCloseSearch(e, true)}
-          className="absolute  z-[51] m-5 top-0 right-0 text-white text-3xl"
-        >
-          <MdClose />
-        </button>
+      <button
+        onClick={(e) => handleCloseSearch(e, true)}
+        className="absolute  z-[51] m-5 top-0 right-0 text-white text-3xl"
+      >
+        <MdClose />
+      </button>
 
-        {loading ? (
-          <LoadingConversation />
-        ) : (
-          filteredUsers &&
-          filteredUsers.map((user, index) => (
-            <div
-              className="mt-3 transition-all  "
-              onClick={() => {
+      {loading ? (
+        <LoadingConversation />
+      ) : (
+        filteredUsers &&
+        filteredUsers.map((user, index) => (
+          <div
+            className="mt-3 transition-all  "
+            onClick={() => {
+              dispatch(
+                setSelectedConversation({
+                  _id: user._id,
+                  userName: user.userName,
+                  profilePicture: user.profilePicture,
+                })
+              );
+              const ids = conversations.map((conversation) => {
+                return conversation._id;
+              });
+
+              if (!ids.includes(user._id)) {
                 dispatch(
-                  setSelectedConversation({
+                  addConversations({
                     _id: user._id,
                     userName: user.userName,
                     profilePicture: user.profilePicture,
                   })
                 );
-                const ids = conversations.map((conversation) => {
-                  return conversation._id;
-                });
+              }
 
-                if (!ids.includes(user._id)) {
-                  dispatch(
-                    addConversations({
-                      _id: user._id,
-                      userName: user.userName,
-                      profilePicture: user.profilePicture,
-                    })
-                  );
-                }
-
-                handleCloseSearch(null, true);
-              }}
-              key={user._id}
-            >
-              <Conversation conversation={user}></Conversation>
-            </div>
-          ))
-        )}
-      </div>
+              handleCloseSearch(null, true);
+            }}
+            key={user._id}
+          >
+            <Conversation conversation={user}></Conversation>
+          </div>
+        ))
+      )}
     </div>
   );
 };

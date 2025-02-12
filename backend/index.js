@@ -36,6 +36,7 @@ app.get("*", (req, res) => {
 })
 
 server.listen(PORT, () => {
+  
   connectToMongoDB();
   console.log(`server is alive at ${PORT}`);
 });

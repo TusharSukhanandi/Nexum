@@ -115,6 +115,7 @@ const Messages = ({ isMobile }) => {
             ) : null}
             <div className="animate-fadeIn relative text-xs rounded-full md:w-12 w-12 ml-5 ">
               <img
+                className="w-full object-cover rounded-full"
                 src={
                   selectedConversation && selectedConversation.profilePicture
                 }

@@ -12,7 +12,7 @@ function ProfileIcon() {
    
   return (
     <div onClick={() => dispatch(toggleProfileScreen())} className="w-10 h-10 rounded-full cursor-pointer border-x-2 border-y-2 border-white flex justify-center items-center ">
-        <img className='w-[90%]' src={user?.profilePicture}></img>
+        <img className='w-full h-full rounded-full object-cover  ' src={user.profilePicture}/>
     </div>
   )
 }
