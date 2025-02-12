@@ -31,7 +31,8 @@ const Conversations = () => {
       {loading ? (
         <LoadingConversation />
       ) : conversations.length > 0 ? (
-        <div className="w-full mt-7 ">
+
+        <div className="w-full mt-7 overflow-scroll no-scrollbar">
           {conversations &&
             conversations.map((conversation) => (
               <div
