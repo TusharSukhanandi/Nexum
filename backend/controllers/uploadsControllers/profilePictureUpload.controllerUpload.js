@@ -88,7 +88,7 @@ const profilePictureUpload = async (req, res) => {
     });
   } catch (error) {
     console.log("Error in profilePictureUpload: ", error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error" , error});
   }
 };
 
